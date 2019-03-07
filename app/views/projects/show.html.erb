@@ -1,0 +1,33 @@
+<h1><%= @project.name %></h1>
+<% if user_signed_in? %>
+  <%= link_to 'Edit', edit_project_path(@project) %>
+  |
+  <%= link_to 'Delete', project_path(@project), method: :delete, data: {confirm: 'Are you sure?'} %>
+<% end %>
+
+
+    <p>Description: <%= @project.summary %></p>
+    <p>Start date: <%= @project.start_date.to_date.strftime("%d %B %Y") %></p>
+    <p>End date: <%= @project.end_date.to_date.strftime("%d %B %Y") %></p>
+
+  <h1>Project tasks</h1>
+
+
+    <table class="table table-bordered table-striped">
+      <thead>
+      <tr>
+        <td>Title</td>
+        <td>Description</td>
+        <td>Status</td>
+      </tr>
+      </thead>
+      <tbody>
+      <% @project.tasks.each do |task| %>
+        <tr>
+          <td><%= link_to task.title, task_path(task) %></td>
+          <td><%= task.description %></td>
+          <td><%= task.status %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>

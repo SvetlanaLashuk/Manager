@@ -1,0 +1,26 @@
+<h1><%= @task.title %></h1>
+<% if user_signed_in? %>
+<%= link_to 'Edit', edit_task_path(@task) %>
+|
+<%= link_to 'Delete', task_path(@task), method: :delete, data: {confirm: 'Are you sure?'} %>
+<% end %>
+<div>
+  <label>Project:</label>
+  <% if @task.project.present? %>
+    <%= link_to @task.project.name, @task.project %>
+</div>
+<% end %>
+
+<div>
+  <label>Description:</label>
+  <%= @task.description %>
+</div>
+<div>
+  <label>Status:</label>
+  <%= @task.status %>
+</div>
+<div>
+  <label>Assigned to:</label>
+  <%= @task.user.first_name %>
+  <%= @task.user.last_name %>
+</div>
